@@ -8,7 +8,7 @@ class App extends React.Component{
         super();
         this.state = {
             projects:[],
-            details: null
+            details: {}
         }
 
         this.getProjectDetails = this.getProjectDetails.bind(this);
@@ -54,7 +54,6 @@ class App extends React.Component{
                 </div>
 
             </div>
-
 
             )
     }

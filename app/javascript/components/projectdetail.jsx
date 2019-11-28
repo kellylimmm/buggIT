@@ -3,13 +3,21 @@ import React from 'react'
 
 class ProjectDetail extends React.Component {
     render(){
+        console.log(this.props.details) // should give an array
+        console.log(this.props.details[0]) // should give an object
 
-        return(
+
+       return(
             <div>
-                <p>{this.props.details? this.props.details.project_title : ""}</p>
-                <p>{this.props.details? this.props.details.user_id : ""}</p>
-                <p>{this.props.details? this.props.details.start_date : ""}</p>
-                <p>{this.props.details? this.props.details.end_date : ""}</p>
+
+                {this.props.details.length > 0 ? (
+                    <div>
+                        <p>{this.props.details[0].project_title}</p>
+                        <p>{this.props.details[0].user_id}</p>
+                        <p>{this.props.details[0].start_date}</p>
+                        <p>{this.props.details[0].end_date}</p>
+                    </div>
+                ) : ""}
 
             </div>
 
