@@ -5,12 +5,12 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
+    p "///////////////////////////"
     @projects = Project.all
 
     respond_to do |format|
     format.json {
-      render :json => @projects,
-      include: :user
+      render :json => @projects
     }
 
   format.html
