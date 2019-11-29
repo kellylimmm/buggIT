@@ -5,12 +5,20 @@ class BugsController < ApplicationController
   # GET /bugs
   # GET /bugs.json
   def index
-    @bugs = Bug.all
-  end
+    p params
+    @bugs = Bug.all.where(params[:project_id])
 
+    respond_to do |format|
+    format.json {
+      render :json => @bugs
+    }
+  end
+end
   # GET /bugs/1
   # GET /bugs/1.json
   def show
+    @bugs = Bug.all.where(params[:project_id])
+    render :json => @bugs
   end
 
   # GET /bugs/new

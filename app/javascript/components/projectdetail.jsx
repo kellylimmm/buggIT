@@ -16,6 +16,7 @@ class ProjectDetail extends React.Component {
                         <p>{this.props.details[0].user_id}</p>
                         <p>{this.props.details[0].start_date}</p>
                         <p>{this.props.details[0].end_date}</p>
+                        <p>{this.props.details[0].status}</p>
                     </div>
                 ) : ""}
 

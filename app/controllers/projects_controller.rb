@@ -10,7 +10,8 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
     format.json {
-      render :json => @projects
+      render :json => @projects,
+      include: [:bug]
     }
 
   format.html
