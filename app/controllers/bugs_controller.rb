@@ -6,7 +6,7 @@ class BugsController < ApplicationController
   # GET /bugs.json
   def index
     p params
-    @bugs = Bug.all.where(params[:project_id])
+    @bugs = Bug.all.where(params[:id])
 
     respond_to do |format|
     format.json {

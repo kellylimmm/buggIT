@@ -16,7 +16,9 @@
 # Project.create!(status: "Cancelled")
 
 
-Bug.create!(bug_title: "Bug 1", project_id: 1, issue_log:"Syntax Error", due_date: "2019-11-15", priority:"Low", status: "Cancelled", issue_resolved:"Remove comma")
+# Bug.create!(bug_title: "Bug 1", project_id: 1, issue_log:"Syntax Error", due_date: "2019-11-15", priority:"Low", status: "Cancelled", issue_resolved:"Remove comma")
+Bug.create!(bug_title: "Bug 2", project_id: 1, issue_log:"Syntax Error", due_date: "2019-11-15", priority:"Low", status: "Cancelled", issue_resolved:"Remove comma",severity:"Major")
+Bug.create!(bug_title: "Bug 3", project_id: 2, issue_log:"Error", due_date: "2019-08-15", priority:"High", status: "Active", issue_resolved:"Add Comma",severity:"Minor")
 
 
 # Project.create!(status: "Active")

@@ -4,14 +4,15 @@ import Project from './project'
 import ProjectDetail from './projectdetail'
 import BugDetail from './bugdetail'
 
+
 class App extends React.Component{
     constructor(){
         super();
         this.state = {
             projects:[],
             details: {},
-            deets:{},
-            bugs:[],
+            deets:{}
+
 
         }
 
@@ -47,18 +48,18 @@ class App extends React.Component{
 
     getBugDetails(bug_id){
 
-        const url = "/bugs/" + 1
-        fetch(url,{
-            method:"GET",
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(res=>res.json())
-        .then(result=>{
-            this.setState({bugs:result})
-        })
-        .catch(error => console.log(error));
+        // const url = "/bugs/" + 1
+        // fetch(url,{
+        //     method:"GET",
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
+        // .then(res=>res.json())
+        // .then(result=>{
+        //     this.setState({bugs:result})
+        // })
+        // .catch(error => console.log(error));
 
         // const deets = this.state.bugs.filter(object=>object.id === bug_id);
         // this.setState({deets:deets});
@@ -75,9 +76,10 @@ class App extends React.Component{
                 <div className="row">
 
 
-                        <div className="col-4 border p-4"><Project proj={this.state.projects} getProjectDetails={this.getProjectDetails} getBugDetails={this.getBugDetails}/></div>
+                        <div className="col-4 border p-4"><Project proj={this.state.projects} getProjectDetails={this.getProjectDetails}
+                        getBugDetails={this.getBugDetails}/></div>
                         <div className="col-4 border p-4"><ProjectDetail details={this.state.details}/></div>
-                        <div className="col-4 border p-4"><BugDetail deets={this.state.projects}/></div>
+                        <div className="col-4 border p-4"><BugDetail details={this.state.details}/></div>
 
 
 

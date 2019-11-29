@@ -18,8 +18,7 @@ class Project extends React.Component{
 
 
     render(){
-        const projectList = this.props.proj? this.props.proj.map(project=><p key={project.id}
-            onClick={(e)=>{this.handleClick(e,project.id)}}>{project.project_title}</p>) : "";
+        const projectList = this.props.proj? this.props.proj.map(project=><p key={project.id} onClick={(e)=>{this.handleClick(e,project.id)}}>{project.project_title}</p>) : "";
         return(
 
             <div>
