@@ -3,6 +3,8 @@ import axios from 'axios';
 import Project from './project'
 import ProjectDetail from './projectdetail'
 import BugDetail from './bugdetail'
+import Form from './form'
+import {Button} from "react-bootstrap"
 
 
 class App extends React.Component{
@@ -80,11 +82,11 @@ class App extends React.Component{
                         getBugDetails={this.getBugDetails}/></div>
                         <div className="col-4 border p-4"><ProjectDetail details={this.state.details}/></div>
                         <div className="col-4 border p-4"><BugDetail details={this.state.details}/></div>
-
+                        <Form proj={this.state.projects}/>
 
 
                 </div>
-
+                        <Button>Close</Button>
             </div>
 
             )

@@ -10,7 +10,7 @@ class BugDetail extends React.Component {
             <div>
 
                 <p>Bug Title: {bug.bug_title}</p>
-                <p>Status: {bug.status}</p>
+                <p>Status: {bug.status ? "Open" : "Closed"}</p>
                 <p>Due Date: {bug.due_date}</p>
                 <p>Severity: {bug.severity}</p>
             </div>
