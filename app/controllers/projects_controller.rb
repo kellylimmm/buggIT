@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   # before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  protect_from_forgery with: :null_session
 
   # GET /projects
   # GET /projects.json
@@ -37,6 +38,7 @@ end
   def create
     @project = Project.new(project_params)
 
+
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
@@ -46,6 +48,8 @@ end
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
+
+
   end
 
   # PATCH/PUT /projects/1
@@ -82,4 +86,9 @@ end
     def project_params
       params.fetch(:project, {})
     end
+
+    def other_params
+      params.require(:project).permit(:bug_title, :issue_log, :due_date, :priority, :status, :issue_resolved, :severity)
+    end
+
 end

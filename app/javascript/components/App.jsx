@@ -4,11 +4,14 @@ import Project from './project'
 import ProjectDetail from './projectdetail'
 import BugDetail from './bugdetail'
 import Form from './form'
-// import {Button} from "react-bootstrap"
+import {Nav, Navbar, NavItem, FormControl} from "react-bootstrap"
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 // import {Container, Button, Alert, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
+// import Navbar from 'react-bootstrap/Navbar'
+// import Navbar from './navbar'
+
 
 
 
@@ -22,9 +25,11 @@ class App extends React.Component{
             modalIsOpen: false,
             bugsname: "",
             comments:"",
-            priority:"low",
+            priority:"",
             dueDate: new Date(),
-            severity: ""
+            severity: "",
+            selected_project_id:null,
+            status: ""
 
 
         }
@@ -57,7 +62,10 @@ class App extends React.Component{
 
     getProjectDetails(project_id){
         const details = this.state.projects.filter(obj=>obj.id === project_id);
-        this.setState({details:details});
+        this.setState({
+            details:details,
+            selected_project_id:project_id
+        });
         console.log(details)
     }
 
@@ -97,13 +105,15 @@ class App extends React.Component{
         alert(` ${this.state.bugsname} ${this.state.comments} ${this.state.dueDate} ${this.state.priority} ${this.state.severity}`)
         event.preventDefault()
         console.log(this.state)
-        axios.post('http://localhost:3000/projects', {
+        axios.post('http://localhost:3000/bugs', {
             modalIsOpen: false,
-            bugsname: "",
-            comments:"",
-            priority:"low",
+            bugsname: this.state.bugsname,
+            comments:this.state.comments,
+            priority:this.state.priority,
             dueDate: new Date(),
-            severity: ""
+            status: this.state.status,
+            severity: this.state.severity,
+            project_id:this.state.selected_project_id
         }
             )
             .then(response => {
@@ -121,16 +131,23 @@ class App extends React.Component{
 
         return(
 
+
             <div className="container">
+
                 <div className="row">
 
-                    <div className="col-4 border p-4"><Project proj={this.state.projects} getProjectDetails={this.getProjectDetails}
+                    <div className="col-4 border p-4">
+                    <Button color="primary" className="position-relative d-inline float-right" onClick={this.toggleModal.bind(this)}><strong>+</strong></Button>
+                    <Project proj={this.state.projects} getProjectDetails={this.getProjectDetails}
                     getBugDetails={this.getBugDetails}/></div>
-                    <div className="col-4 border p-4"><ProjectDetail details={this.state.details}/></div>
-                    <div className="col-4 border p-4"><BugDetail details={this.state.details}/></div>
 
+                    <div className="col-4 border p-4">
+                    <ProjectDetail details={this.state.details}/></div>
 
-                    <Button color="primary" onClick={this.toggleModal.bind(this)}>Add Bug</Button>
+                    <div className="col-4 border p-4">
+                     <Button color="primary" className="position-relative d-inline float-right" onClick={this.toggleModal.bind(this)}><strong>+</strong></Button>
+                    <BugDetail details={this.state.details}/></div>
+
 
 
                 <Modal isOpen={this.state.modalIsOpen}>

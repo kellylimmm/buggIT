@@ -1,5 +1,6 @@
 class BugsController < ApplicationController
   # before_action :set_bug, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_user!
 
   # GET /bugs
@@ -17,8 +18,8 @@ end
   # GET /bugs/1
   # GET /bugs/1.json
   def show
-    @bugs = Bug.all.where(params[:project_id])
-    render :json => @bugs
+    @bugs = Bug.find(params[:id])
+    # render :json => @bugs
   end
 
   # GET /bugs/new
@@ -33,15 +34,20 @@ end
   # POST /bugs
   # POST /bugs.json
   def create
-    @bug = Bug.new(bug_params)
+    p "/////////////////////////////////////"
+    @bug = Bug.new(:bug_title => params[:bugsname], :issue_log => params[:comments], :project_id => params[:project_id],
+      :due_date => params[:dueDate], :priority => params[:priority], :status => params[:status], :severity => params[:severity])
+
 
     respond_to do |format|
       if @bug.save
-        format.html { redirect_to @bug, notice: 'Bug was successfully created.' }
-        format.json { render :show, status: :created, location: @bug }
+        p 'successsssssssss'
+        format.html { redirect_to @bug }
+        format.json { render json: "ok" }
       else
-        format.html { render :new }
-        format.json { render json: @bug.errors, status: :unprocessable_entity }
+        p 'failllllllll'
+        # format.html { render :new }
+        # format.json { render json: @bug.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -77,7 +83,7 @@ end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def bug_params
-      params.fetch(:bug, {})
-    end
+    # def bug_params
+    #   params.fetch(:bug, {})
+    # end
 end

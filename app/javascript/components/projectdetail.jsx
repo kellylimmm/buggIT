@@ -12,7 +12,7 @@ class ProjectDetail extends React.Component {
 
                 {this.props.details.length > 0 ? (
                     <div>
-                        <h3> Projects </h3>
+
                         <p>Project Title: {this.props.details[0].project_title}</p>
                         <p>Number of Bugs: {this.props.details[0].bug.length}</p>
                         <p>Start Date: {this.props.details[0].start_date}</p>

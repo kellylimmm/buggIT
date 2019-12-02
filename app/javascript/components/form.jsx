@@ -60,7 +60,7 @@ class Form extends React.Component {
         const projectOptions = this.props.proj.map(project=>{
             return(
                 <option value={project.project_title}>
-                {project.project_title}
+                    {project.project_title}
                 </option>
                 )
         })
