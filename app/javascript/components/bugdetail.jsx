@@ -11,8 +11,8 @@ class BugDetail extends React.Component {
            return(
             <div>
 
-                <a href={url}>Bug Title: {bug.bug_title}</a>
-
+                <p><a href={url}>Bug Title: {bug.bug_title}</a></p>
+                <br/>
                 <p>Status: {bug.status ? "Open" : "Closed"}</p>
                 <p>Due Date: {bug.due_date}</p>
                 <p >Severity: {bug.severity}</p>

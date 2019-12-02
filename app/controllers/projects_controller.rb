@@ -36,16 +36,17 @@ end
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
+    @project = Project.new(:project_title => params[:project_title], :start_date => params[:startDate], :end_date => params[:endDate],
+      :status => params[:project_status])
 
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render :show, status: :created, location: @project }
+        p "pass on projects controller"
+        format.html { redirect_to @project}
+        format.json { render json: "ok" }
       else
-        format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        p "fail on projects controller"
       end
     end
 
