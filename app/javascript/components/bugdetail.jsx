@@ -9,16 +9,18 @@ class BugDetail extends React.Component {
         let bugs = this.props.details[0] ? this.props.details[0].bug.map((bug) =>{
             const url = "/bugs/"+bug.id
            return(
+            <a href={url}>
             <div>
 
-                <p><a href={url}>Bug Title: {bug.bug_title}</a></p>
+
+                <p>Bug Title: {bug.bug_title}</p>
                 <br/>
-                <p>Status: {bug.status ? "Open" : "Closed"}</p>
+                <p>Status: {bug.status ? "Closed" : "Open"}</p>
                 <p>Due Date: {bug.due_date}</p>
                 <p >Severity: {bug.severity}</p>
                 <hr/>
             </div>
-
+            </a>
             )
         }) : "" // should give an array
         // console.log(this.props.deets[0]) // should give an object

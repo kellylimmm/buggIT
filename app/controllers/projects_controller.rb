@@ -39,6 +39,8 @@ end
     @project = Project.new(:project_title => params[:project_title], :start_date => params[:startDate], :end_date => params[:endDate],
       :status => params[:project_status])
 
+    @project.user_id = current_user.id
+
 
     respond_to do |format|
       if @project.save

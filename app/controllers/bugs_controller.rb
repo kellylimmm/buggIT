@@ -29,6 +29,10 @@ end
 
   # GET /bugs/1/edit
   def edit
+    @bug = Bug.find(params[:id])
+    p "@@@@@@@@@@@@"
+    p @bug
+    p "@@@@@@@@@@@@"
   end
 
   # POST /bugs
@@ -55,15 +59,10 @@ end
   # PATCH/PUT /bugs/1
   # PATCH/PUT /bugs/1.json
   def update
-    respond_to do |format|
-      if @bug.update(bug_params)
-        format.html { redirect_to @bug, notice: 'Bug was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bug }
-      else
-        format.html { render :edit }
-        format.json { render json: @bug.errors, status: :unprocessable_entity }
-      end
-    end
+    @bug = Bug.find(params[:id])
+    @bug.update(bug_params)
+
+      redirect_to @bug
   end
 
   # DELETE /bugs/1
@@ -76,14 +75,21 @@ end
     end
   end
 
+  def human_boolean(boolean)
+    boolean ? 'Closed' : 'Open'
+end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bug
       @bug = Bug.find(params[:id])
     end
 
+def bug_params
+  params.require(:bug).permit(:bug_title, :issue_log, :project_id, :due_date, :priority, :status, :issue_resolved, :severity)
     # Never trust parameters from the scary internet, only allow the white list through.
     # def bug_params
     #   params.fetch(:bug, {})
     # end
+end
 end

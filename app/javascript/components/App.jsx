@@ -36,10 +36,12 @@ class App extends React.Component{
             project_title:"",
             startDate: new Date(),
             endDate: new Date(),
-            project_status:""
+            project_status:"",
+            modal: false
         }
 
         this.getProjectDetails = this.getProjectDetails.bind(this);
+        this.closeModal = this.closeModal.bind(this)
 
     }
 
@@ -118,7 +120,7 @@ class App extends React.Component{
 
 
     handleSubmit2 = event => {
-        alert(` ${this.state.bugsname} ${this.state.comments} ${this.state.dueDate} ${this.state.priority} ${this.state.severity}`)
+        // alert(` ${this.state.bugsname} ${this.state.comments} ${this.state.dueDate} ${this.state.priority} ${this.state.severity}`)
         event.preventDefault()
         console.log(this.state)
         axios.post('http://localhost:3000/bugs', {
@@ -134,12 +136,17 @@ class App extends React.Component{
             )
             .then(response => {
                 console.log(response)
+                // this.setState({bugs: [...this.state.projects, {bug_title: this.state.bug_title}]})
             })
             .catch(error => {
                 console.log(error.response)
             })
     }
 
+     closeModal() {
+        console.log("close");
+        this.setState({ modal: false });
+      };
     //PROJECT MODAL
 
     handleProjectTitleChange = event => {
@@ -166,28 +173,27 @@ class App extends React.Component{
             })
         }
 
-        handleSubmit1 = event => {
-    alert(` ${this.state.project_title} ${this.state.startDate} ${this.state.endDate} ${this.state.project_status}`)
-    event.preventDefault()
-    console.log(this.state)
-    axios.post('http://localhost:3000/projects', {
-        modalIsOpen: false,
-        project_title: this.state.project_title,
-        startDate: new Date(),
-        endDate: new Date(),
-        project_status: this.state.project_status,
-        user_id:this.state.selected_user_id
+    handleSubmit1 = event => {
+        alert(` ${this.state.project_title} ${this.state.startDate} ${this.state.endDate} ${this.state.project_status}`)
+        event.preventDefault()
+        console.log(this.state)
+        axios.post('http://localhost:3000/projects', {
+            modalIsOpen: false,
+            project_title: this.state.project_title,
+            startDate: new Date(),
+            endDate: new Date(),
+            project_status: this.state.project_status,
+            user_id:this.state.selected_user_id
 
-    }
-        )
-    // this.setState({project_title: event.target.value})
+        })
+
         .then(response => {
-            console.log(response)
+            this.setState({projects: [...this.state.projects, {project_title: this.state.project_title}]})
         })
         .catch(error => {
             console.log(error.response)
         })
-}
+    }
 
     render(){
 
@@ -196,14 +202,26 @@ class App extends React.Component{
         return(
 
 
+
+
+
             <div className="container">
 
                 <div className="row">
 
+                    <div className="col-4 p-3">
+                         <header>PROJECTS</header>
+                    </div>
+                </div>
+
+                <div className="row">
+
                     <div className="col-4 border p-4">
+
+
                     <Button color="primary" className="position-relative d-inline float-right" onClick={this.toggleModal1.bind(this)}><strong>+</strong></Button>
-                    <Project proj={this.state.projects} getProjectDetails={this.getProjectDetails}
-                    getBugDetails={this.getBugDetails}/></div>
+                    <Project proj={this.state.projects} getProjectDetails={this.getProjectDetails}/></div>
+
 
 
                 <Modal isOpen={this.state.modalIsOpen1}>
@@ -253,6 +271,7 @@ class App extends React.Component{
 
 
                     <div className="col-4 border p-4">
+
                     <ProjectDetail details={this.state.details}/></div>
 
                     <div className="col-4 border p-4">
@@ -309,7 +328,6 @@ class App extends React.Component{
                 </div>
 
             </div>
-
             )
     }
 

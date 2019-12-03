@@ -13,15 +13,17 @@ class ProjectDetail extends React.Component {
                 {this.props.details.length > 0 ? (
                     <div class="container1">
 
-                        <p>Project Title: <br/> {this.props.details[0].project_title}</p>
+                        <p>Project Title:  {this.props.details[0].project_title}</p>
 
-                        <p>Number of Bugs: <br/> {this.props.details[0].bug.length}</p>
+                        <p>Number of Bugs: {this.props.details[0].bug.length}</p>
 
-                        <p>Start Date: <br/> {this.props.details[0].start_date}</p>
+                        <p>Start Date: {this.props.details[0].start_date}</p>
 
-                        <p>End Date: <br/> {this.props.details[0].end_date}</p>
+                        <p>End Date: {this.props.details[0].end_date}</p>
 
-                        <p>Status: <br/> {this.props.details[0].status}</p>
+                        <p>Status:  {this.props.details[0].status ? "Closed" : "Open"}</p>
+
+
 
                     </div>
                 ) : ""}

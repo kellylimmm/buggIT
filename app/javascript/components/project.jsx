@@ -10,7 +10,7 @@ class Project extends React.Component{
     handleClick(e,project_id){
 
         this.props.getProjectDetails(project_id);
-        this.props.getBugDetails(project_id);
+        // this.props.getBugDetails(project_id);
 
 
     }
@@ -22,7 +22,7 @@ class Project extends React.Component{
 
             <div>
 
-               <p className="clickbutton"> {projectList} </p>
+               <div className="clickbutton"> {projectList} </div>
 
             </div>
 

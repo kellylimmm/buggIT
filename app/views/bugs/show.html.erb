@@ -1,30 +1,46 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
-<h1>Bugs Description</h1>
+<h3>Bugs Description</h3>
 
-<table>
-	<thead>
-		<tr>
-			<td></td>
-			<th colspan="3"></th>
-		</tr>
-	</thead>
 
-	<tbody>
 
-			<tr>
-				<td><%= @bugs.bug_title %></td>
-				<td><%= @bugs.issue_log %></td>
-				<td><%= @bugs.due_date %></td>
-				<td><%= @bugs.priority %></td>
-				<td><%= @bugs.status %></td>
-				<td><%= @bugs.issue_resolved %></td>
-				<td><%= @bugs.severity %></td>
-			</tr>
+			<div class="container">
+				<div class="row">
+					<div class="col-4 border">
+						<br/>
+						<p><b>Bugs Title:</b><br/><%= @bugs.bug_title %><p>
+							<br/>
+						<p><b>Status:</b>
+							<br/><%= @bugs.status? ? "Closed" : "Open" %><p>
+					</div>
 
-	</tbody>
-</table>
+					<div class="col-4 border">
+						<br/>
+						<p><b>Issue Log:</b><br/><%= @bugs.issue_log %><p>
+					</div>
+
+					<div class="col-4 border">
+						<br/>
+						<p><b>Due Date:</b><br/><%= @bugs.due_date %><p>
+						<p><b>Priority:</b><br/><%= @bugs.priority %><p>
+						<p><b>Severity:</b><br/><%= @bugs.severity %><p>
+					</div>
+
+			</div>
+		</div>
+<br/>
+<div class="container">
+
+			<div class="row">
+
+					<p><b>Issue Resolved:</b>
+						<br/>
+						<%= @bugs.issue_resolved %><p>
+				</div>
+<%= link_to 'Edit', edit_bug_path %>
+</div>
+
+
+				</div>
 
 <br>
-
-<%= link_to 'New Bug', new_bug_path %>

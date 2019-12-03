@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2019_11_28_060013) do
     t.text "issue_log"
     t.date "due_date"
     t.string "priority"
-    t.boolean "status", default: false
+    t.boolean "status", default: true
     t.text "issue_resolved"
     t.string "severity"
     t.datetime "created_at", precision: 6, null: false

@@ -1,6 +1,48 @@
-<h1>Editing Bug</h1>
+<h3>Updating Bug</h3>
 
-<%= render 'form', bug: @bug %>
+<div class="form">
+<%= form_with scope: :bug, model: @bug, local: true do |form| %>
 
-<%= link_to 'Show', @bug %> |
-<%= link_to 'Back', bugs_path %>
+	<p>
+		<%= form.label :bug_title %><br>
+		<%= form.text_field :bug_title %>
+	</p>
+
+	<p>
+		<%= form.label :issue_log %><br>
+		<%= form.text_area :issue_log%>
+	</p>
+
+		<p>
+		<%= form.label :due_date %><br>
+		<%= form.text_field :due_date%>
+	</p>
+
+		<p>
+		<%= form.label :priority %><br>
+		<%= form.text_field :priority %>
+	</p>
+
+		<p>
+		<%= form.label :status %><br>
+		<%= form.text_field :status%>
+	</p>
+
+		<p>
+		<%= form.label :issue_resolved %><br>
+		<%= form.text_area :issue_resolved%>
+	</p>
+
+		<p>
+		<%= form.label :severity %><br>
+		<%= form.text_field :severity%>
+	</p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+
+  <%= link_to 'Back', bug_path %>
+
+</div>
+<% end %>
