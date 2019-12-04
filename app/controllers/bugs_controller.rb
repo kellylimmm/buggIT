@@ -47,7 +47,7 @@ end
       if @bug.save
         p 'successsssssssss'
         format.html { redirect_to @bug }
-        format.json { render json: "ok" }
+        format.json { render json: @bug }
       else
         p 'failllllllll'
         # format.html { render :new }

@@ -21,7 +21,7 @@ class ProjectDetail extends React.Component {
 
                         <p>End Date: {this.props.details[0].end_date}</p>
 
-                        <p>Status:  {this.props.details[0].status ? "Closed" : "Open"}</p>
+                        <p>Status:  {this.props.details[0].status}</p>
 
 
 

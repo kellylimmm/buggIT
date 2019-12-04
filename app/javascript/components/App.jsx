@@ -37,7 +37,9 @@ class App extends React.Component{
             startDate: new Date(),
             endDate: new Date(),
             project_status:"",
-            modal: false
+            modal: false,
+            clicked: false,
+            bugs:""
         }
 
         this.getProjectDetails = this.getProjectDetails.bind(this);
@@ -78,6 +80,7 @@ class App extends React.Component{
         this.setState({
             details:details,
             selected_project_id:project_id,
+            clicked:true
             // selected_user_id:user_id
 
         });
@@ -122,7 +125,13 @@ class App extends React.Component{
     handleSubmit2 = event => {
         // alert(` ${this.state.bugsname} ${this.state.comments} ${this.state.dueDate} ${this.state.priority} ${this.state.severity}`)
         event.preventDefault()
-        console.log(this.state)
+        const data = {
+            bug_title: this.state.bugsname,
+            status: this.state.status,
+            due_date: new Date(),
+            severity: this.state.severity
+        }
+             console.log(this.state.details)
         axios.post('http://localhost:3000/bugs', {
             modalIsOpen: false,
             bugsname: this.state.bugsname,
@@ -132,11 +141,33 @@ class App extends React.Component{
             status: this.state.status,
             severity: this.state.severity,
             project_id:this.state.selected_project_id
+
         }
+
+
             )
             .then(response => {
-                console.log(response)
-                // this.setState({bugs: [...this.state.projects, {bug_title: this.state.bug_title}]})
+                this.toggleModal2()
+                let url = response.request.responseURL
+                let number = url.split('/')[4]
+                // let newDetails = this.state.details
+                // newDetails[0].bug.push(data)
+                    let details = [...this.state.details]
+                    let detailsObj = {...details[0]}
+                    let bugs = [...detailsObj.bug]
+
+                    let x = data.due_date
+                    let string = `${x.getFullYear()}-${x.getMonth()+1}-${x.getDate()}`
+                    data.due_date = string
+                    data.id = number
+
+                    bugs = [...bugs, data]
+                    detailsObj.bug = bugs
+                    details[0] = detailsObj
+
+                // let bugs = [...this.state.details[0].bug, data]
+                // this.setState({details: {bugs : [...this.state.details[0].bugs, data]}})
+                this.setState({details: details})
             })
             .catch(error => {
                 console.log(error.response)
@@ -173,10 +204,13 @@ class App extends React.Component{
             })
         }
 
+
+
     handleSubmit1 = event => {
-        alert(` ${this.state.project_title} ${this.state.startDate} ${this.state.endDate} ${this.state.project_status}`)
+        // alert(` ${this.state.project_title} ${this.state.startDate} ${this.state.endDate} ${this.state.project_status}`)
         event.preventDefault()
         console.log(this.state)
+        // this.closeModal();
         axios.post('http://localhost:3000/projects', {
             modalIsOpen: false,
             project_title: this.state.project_title,
@@ -187,23 +221,31 @@ class App extends React.Component{
 
         })
 
+
+
         .then(response => {
             this.setState({projects: [...this.state.projects, {project_title: this.state.project_title}]})
+            this.toggleModal1()
         })
         .catch(error => {
             console.log(error.response)
         })
     }
 
+
+
     render(){
 
+        console.log(this.state.details)
+        console.log("AAAAA")
 
+
+        const imageProjDetails = this.state.clicked ? "" : <img src={require('../../assets/images/projplaceholder.png')} className="img-fluid"/>
+        // const placeholderText = this.state.clicked ? "" : "Overview of projects will go here"
+        const imageBugDetails = this.state.clicked ? "" : <img src={require('../../assets/images/projplaceholder.png')} className="img-fluid"/>
+         // const placeholderText2 = this.state.clicked ? "" : "Overview of bugs will go here"
 
         return(
-
-
-
-
 
             <div className="container">
 
@@ -211,6 +253,8 @@ class App extends React.Component{
 
                     <div className="col-4 p-3">
                          <header>PROJECTS</header>
+
+                         <br/><p class="tag">Click on projects to view more..</p>
                     </div>
                 </div>
 
@@ -218,67 +262,70 @@ class App extends React.Component{
 
                     <div className="col-4 border p-4">
 
+                        <Button color="primary" className="position-relative d-inline float-right ml-n4 btn-sm" onClick={this.toggleModal1.bind(this)}><strong>+</strong></Button>
+                        <Project proj={this.state.projects} getProjectDetails={this.getProjectDetails}/></div>
 
-                    <Button color="primary" className="position-relative d-inline float-right" onClick={this.toggleModal1.bind(this)}><strong>+</strong></Button>
-                    <Project proj={this.state.projects} getProjectDetails={this.getProjectDetails}/></div>
+                    <Modal isOpen={this.state.modalIsOpen1}>
 
+                        <ModalHeader toggle={this.toggleModal1.bind(this)}>Add Project</ModalHeader>
 
+                            <ModalBody>
 
-                <Modal isOpen={this.state.modalIsOpen1}>
-
-                    <ModalHeader toggle={this.toggleModal1.bind(this)}>Add Project</ModalHeader>
-
-                        <ModalBody>
-
-                            <form onSubmit={this.handleSubmit1}>
+                                <form onSubmit={this.handleSubmit1}>
 
 
-                                <label>Project Title </label>
-                                <input type='text'value ={this.state.project_title} onChange={this.handleProjectTitleChange}/>
+                                    <label>Project Title </label>
+                                    <input type='text'value ={this.state.project_title} onChange={this.handleProjectTitleChange}/>
 
-                                <label>Start Date</label>
-                                <DatePicker selected={this.state.startDate} onChange={this.handleStartDateChange}/>
+                                    <label>Start Date</label>
+                                    <DatePicker selected={this.state.startDate} onChange={this.handleStartDateChange}/>
 
-                                <label>End Date</label>
-                                <DatePicker selected={this.state.endDate} onChange={this.handleEndDateChange}/>
+                                    <label>End Date</label>
+                                    <DatePicker selected={this.state.endDate} onChange={this.handleEndDateChange}/>
 
-                                <label>Status</label>
-                                     <select value={this.state.project_status} onChange={this.handleProjectStatusChange}>
-                                        <option value="Active">Active</option>
-                                        <option value="In Progress">In Progress</option>
-                                        <option value="On Hold">On Hold</option>
-                                        <option value="Delayed">Delayed</option>
-                                        <option value="Cancelled">Cancelled</option>
-                                        <option value="Completed">Completed</option>
-                                    </select>
+                                    <label>Status</label>
+                                         <select value={this.state.project_status} onChange={this.handleProjectStatusChange}>
+                                            <option value="Active">Active</option>
+                                            <option value="In Progress">In Progress</option>
+                                            <option value="On Hold">On Hold</option>
+                                            <option value="Delayed">Delayed</option>
+                                            <option value="Cancelled">Cancelled</option>
+                                            <option value="Completed">Completed</option>
+                                        </select>
 
 
 
-                                <b/>
+                                    <b/>
 
-                                   <ModalFooter>
-                                <Button color="primary">Submit</Button>
-                                <Button color="secondary" onClick={this.toggleModal1.bind(this)}>Cancel</Button>
-                            </ModalFooter>
+                                       <ModalFooter>
+                                    <Button color="primary">Submit</Button>
+                                    <Button color="secondary" onClick={this.toggleModal1.bind(this)}>Cancel</Button>
+                                </ModalFooter>
 
-                            </form>
+                                </form>
 
-                        </ModalBody>
+                            </ModalBody>
 
-                </Modal>
-
-
+                    </Modal>
 
 
                     <div className="col-4 border p-4">
+
+                         {imageProjDetails}
+
+
+
+
 
                     <ProjectDetail details={this.state.details}/></div>
 
                     <div className="col-4 border p-4">
-                     <Button color="primary" className="position-relative d-inline float-right" onClick={this.toggleModal2.bind(this)}><strong>+</strong></Button>
+
+                    {imageBugDetails}
+
+
+                     <Button color="primary" className="d-inline float-right ml-n4 btn-sm" style={{position: "absolute", top: "1rem", right: "1rem"}} onClick={this.toggleModal2.bind(this)}><strong>+</strong></Button>
                     <BugDetail details={this.state.details}/></div>
-
-
 
                 <Modal isOpen={this.state.modalIsOpen2}>
 
@@ -287,7 +334,6 @@ class App extends React.Component{
                         <ModalBody>
 
                             <form onSubmit={this.handleSubmit2}>
-
 
                                 <label>Bug Name </label>
                                 <input type='text'value ={this.state.bugsname} onChange={this.handleBugsnameChange}/>
@@ -315,6 +361,7 @@ class App extends React.Component{
                                 <b/>
 
                                    <ModalFooter>
+
                                 <Button color="primary">Submit</Button>
                                 <Button color="secondary" onClick={this.toggleModal2.bind(this)}>Cancel</Button>
                             </ModalFooter>

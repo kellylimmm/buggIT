@@ -5,6 +5,7 @@ class BugDetail extends React.Component {
     render(){
 
         console.log("FROM THE BUG COMPONENT")
+
         // console.log(this.props.details[0].bug)
         let bugs = this.props.details[0] ? this.props.details[0].bug.map((bug) =>{
             const url = "/bugs/"+bug.id
