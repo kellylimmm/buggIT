@@ -8,22 +8,22 @@
 				<div class="row">
 					<div class="col-4 border">
 						<br/>
-						<p><b>Bugs Title:</b><br/><%= @bugs.bug_title %><p>
+						<p><u>Bugs Title:</u><br/><%= @bugs.bug_title %><p>
 							<br/>
-						<p><b>Status:</b>
+						<p><u>Status:</u>
 							<br/><%= @bugs.status? ? "Closed" : "Open" %><p>
 					</div>
 
 					<div class="col-4 border">
 						<br/>
-						<p><b>Issue Log:</b><br/><%= @bugs.issue_log %><p>
+						<p><u>Issue Log:</u><br/><%= @bugs.issue_log %><p>
 					</div>
 
 					<div class="col-4 border">
 						<br/>
-						<p><b>Due Date:</b><br/><%= @bugs.due_date %><p>
-						<p><b>Priority:</b><br/><%= @bugs.priority %><p>
-						<p><b>Severity:</b><br/><%= @bugs.severity %><p>
+						<p><u>Due Date:</u><br/><%= @bugs.due_date %><p>
+						<p><u>Priority:</u><br/><%= @bugs.priority %><p>
+						<p><u>Severity:</u><br/><%= @bugs.severity %><p>
 					</div>
 
 			</div>
@@ -33,7 +33,7 @@
 
 			<div class="row">
 
-					<p><b>Issue Resolved:</b>
+					<p><u>Issue Resolved:</u>
 						<br/>
 						<%= @bugs.issue_resolved %><p>
 				</div>
