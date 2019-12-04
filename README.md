@@ -8,17 +8,20 @@ This app aims to track the bugs faced when completing a project. This would help
 
 ## Technologies used
 
-- Ruby on Rails, Javascript, PostgreSQL, ReactJS
+Rails Fullstack Webpacker
+
+-  ReactJS, Ruby on Rails, Javascript, PostgreSQL
 
 ## Approach
 
-I found myself having to refer to the Stackoverflow forum often to find issues to resolve. Therefore, I created this app so that I could record the issues that I faced and refer to it so that I can learn from it. I started out with a wireframe and and ERD diagram which helps me to see clearly the functions that I would want in my app.
+I found myself having to refer to the Stackoverflow forum often to find issues to resolve. Therefore, I created this app so that I could record the issues that I faced and refer to it so that I can learn from it. I started out with a wireframe and an ERD diagram which helps me to see clearly the functions that I would want in my app.
 
 ## Installation 
 
 ` bundle install`
 
 `rails db:create`
+
 `rails db:migrate`
 
 ## Functions of the App
