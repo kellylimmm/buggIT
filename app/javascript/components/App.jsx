@@ -254,7 +254,7 @@ class App extends React.Component{
                     <div className="col-4 p-3">
                          <header>PROJECTS</header>
 
-                         <br/><p class="tag">Click on projects to view more..</p>
+                         <br/><p class="tag">Click on each project to view more..</p>
                     </div>
                 </div>
 
