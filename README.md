@@ -10,7 +10,7 @@ This app aims to track the bugs faced when completing a project. This would help
 
 Rails Fullstack Webpacker
 
--  ReactJS, Ruby on Rails, Javascript, PostgreSQL
+-  ReactJS, Ruby on Rails, Javascript, PostgreSQL, HTML, CSS, Heroku
 
 ## Approach
 
